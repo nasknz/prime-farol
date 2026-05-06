@@ -1485,7 +1485,7 @@ function updateCart() {
   } else {
     itemsEl.innerHTML = cart.map(c => `
       <div class="cart-item">
-        <div class="cart-item-emoji">${c.emoji}</div>
+        <img src="${c.img}" alt="${c.name}" style="width:64px;height:64px;object-fit:cover;border-radius:8px;">
         <div class="cart-item-info">
           <div class="cart-item-name">${c.name} ${c.qty > 1 ? `x${c.qty}` : ''}</div>
           <div class="cart-item-price">R$ ${(c.price * c.qty).toFixed(2).replace('.',',')}</div>
