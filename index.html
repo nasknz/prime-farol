@@ -1409,7 +1409,7 @@ index.html
 
 <script>
 const products = [
-  { id:1, name:'Farol Dianteiro LED Projetor', cat:'farol', brand:'Universal', price:289.90, oldPrice:350.00, emoji:'💡', badge:'Oferta', compat:'Compatível com Honda, Toyota' },
+  { id:1, name:'Farol Dianteiro LED Projetor', cat:'farol', brand:'Universal', price:289.90, oldPrice:350.00, img:'images/farolclassic.jpg', badge:'Oferta', compat:'Compatível com Carros Classic e Prisma' },
   { id:2, name:'Lanterna Traseira Bicolor', cat:'lanterna', brand:'Universal', price:159.90, oldPrice:null, emoji:'🔴', badge:null, compat:'Diversas aplicações' },
   { id:3, name:'Kit LED H7 6000K Ultrabranco', cat:'led', brand:'TechLight', price:119.90, oldPrice:159.00, emoji:'⚡', badge:'Mais vendido', compat:'Universal' },
   { id:4, name:'Retrovisor Elétrico Esquerdo', cat:'retrovisor', brand:'OEM', price:349.90, oldPrice:null, emoji:'🪞', badge:null, compat:'VW Golf, Polo' },
@@ -1428,7 +1428,7 @@ function renderProducts(filter='todos') {
   grid.innerHTML = filtered.map(p => `
     <div class="product-card reveal">
       <div class="product-img-bg" style="position:relative">
-        <span style="font-size:4rem;z-index:1;position:relative">${p.emoji}</span>
+    <img src="${p.img}" style="width:100%; height:100%; object-fit:cover;">
         ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
       </div>
       <div class="product-body">
