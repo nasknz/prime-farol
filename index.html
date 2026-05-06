@@ -1480,20 +1480,52 @@ function updateCart() {
   document.getElementById('cartTotal').textContent = 'R$ ' + total.toFixed(2).replace('.',',');
   const itemsEl = document.getElementById('cartItems');
   const footerEl = document.getElementById('cartFooter');
-  if(cart.length === 0) {
-    itemsEl.innerHTML = '<div class="cart-empty"><i class="fas fa-shopping-cart"></i>Seu carrinho está vazio</div>';
+  function updateCart() {
+  const count = cart.reduce((a, c) => a + c.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+
+  const total = cart.reduce((a, c) => a + c.price * c.qty, 0);
+  document.getElementById('cartTotal').textContent =
+    'R$ ' + total.toFixed(2).replace('.', ',');
+
+  const itemsEl = document.getElementById('cartItems');
+  const footerEl = document.getElementById('cartFooter');
+
+  if (cart.length === 0) {
+    itemsEl.innerHTML =
+      '<div class="cart-empty"><i class="fas fa-shopping-cart"></i>Seu carrinho está vazio</div>';
+
     footerEl.style.display = 'none';
+
   } else {
+
     itemsEl.innerHTML = cart.map(c => `
       <div class="cart-item">
-        <img src="${c.img}" alt="${c.name}" style="width:64px;height:64px;object-fit:cover;border-radius:8px;">
+
+        <img src="${c.img}"
+             alt="${c.name}"
+             style="width:64px;height:64px;object-fit:cover;border-radius:8px;">
+
         <div class="cart-item-info">
-          <div class="cart-item-name">${c.name} ${c.qty > 1 ? `x${c.qty}` : ''}</div>
-          <div class="cart-item-price">R$ ${(c.price * c.qty).toFixed(2).replace('.',',')}</div>
+          <div class="cart-item-name">
+            ${c.name} ${c.qty > 1 ? `x${c.qty}` : ''}
+          </div>
+
+          <div class="cart-item-price">
+            R$ ${(c.price * c.qty).toFixed(2).replace('.', ',')}
+          </div>
         </div>
-        <button class="cart-item-remove" onclick="removeFromCart(${c.id})"><i class="fas fa-trash"></i></button>
+
+        <button class="cart-item-remove"
+                onclick="removeFromCart(${c.id})">
+
+          <i class="fas fa-trash"></i>
+
+        </button>
+
       </div>
     `).join('');
+
     footerEl.style.display = 'block';
   }
 }
