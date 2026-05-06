@@ -1398,8 +1398,9 @@ index.html
       <span class="cart-total-label">Total</span>
       <span class="cart-total-value" id="cartTotal">R$ 0,00</span>
     </div>
-    <button class="btn-primary" style="width:100%;justify-content:center">
-      <i class="fas fa-lock"></i> Finalizar Compra
+    <button class="btn-primary" style="width:100%;justify-content:center" onclick="finalizarCompra()">
+  <i class="fab fa-whatsapp"></i> Finalizar pelo WhatsApp
+</button>
     </button>
   </div>
 </div>
@@ -1529,6 +1530,31 @@ function observeReveal() {
   }, { threshold: 0.1 });
   els.forEach(el => obs.observe(el));
 }
+  }
+
+function finalizarCompra() {
+  if (cart.length === 0) {
+    alert('Seu carrinho está vazio!');
+    return;
+  }
+
+  let mensagem = 'Olá, tenho interesse nos seguintes produtos:%0A%0A';
+
+  cart.forEach(item => {
+    mensagem += `- ${item.name} | Quantidade: ${item.qty} | Valor: R$ ${(item.price * item.qty).toFixed(2).replace('.', ',')}%0A`;
+  });
+
+  const total = cart.reduce((soma, item) => soma + item.price * item.qty, 0);
+
+  mensagem += `%0ATotal: R$ ${total.toFixed(2).replace('.', ',')}`;
+  mensagem += `%0A%0AGostaria de finalizar a compra.`;
+
+  window.open(`https://wa.me/5591982139382?text=${mensagem}`, '_blank');
+}
+
+// Init
+renderProducts();
+observeReveal();
 
 // Init
 renderProducts();
